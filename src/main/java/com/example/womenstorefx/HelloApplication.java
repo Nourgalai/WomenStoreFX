@@ -29,11 +29,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
             Parent root = loader.load();
 
-            // Set the scene to the stage and configure stage properties
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("Women's Store Management");
             primaryStage.show();

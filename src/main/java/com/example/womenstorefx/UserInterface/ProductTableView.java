@@ -31,7 +31,6 @@ public class ProductTableView {
         TableColumn<ProductModel, Number> nbItemsColumn = new TableColumn<>("Number of Items");
         nbItemsColumn.setCellValueFactory(new PropertyValueFactory<>("nbItems"));
 
-        // Add columns to the TableView
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(nameColumn);
         tableView.getColumns().add(priceColumn);

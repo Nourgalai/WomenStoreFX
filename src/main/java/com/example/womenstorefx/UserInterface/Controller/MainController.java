@@ -26,18 +26,15 @@ public class MainController {
 
     public void showProducts(MouseEvent mouseEvent) {
         try {
-            // Load the FXML file for the new scene
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/showProducts.fxml"));
 
-            // Change the scene on the current stage
+
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
 
-            // Optional: Set title and other properties if needed
             stage.setTitle("Display Products");
 
-            // Refresh the stage to show the new scene
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

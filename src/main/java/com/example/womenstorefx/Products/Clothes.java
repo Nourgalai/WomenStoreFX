@@ -18,6 +18,10 @@ public class Clothes extends Product {
         setSize(size);
     }
 
+    public Clothes(int id, String name, int nbItems) {
+        super(id, name, nbItems);
+    }
+
 
     public int getSize() {
         return size;
@@ -39,14 +43,14 @@ public class Clothes extends Product {
     public String toString() {
         return "Clothes {" +
                 "size=" + size +
-                ", number=" + id +
+                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", nbItems=" + nbItems +
                 '}';
     }
 
-    public void purchase(int nbItems, double purchasePrice){
+    /*public void purchase(int nbItems, double purchasePrice){
         if (purchasePrice>= this.getPrice()){
             throw new IllegalArgumentException("Purchase price must be less than the selling price");
         }
@@ -54,16 +58,8 @@ public class Clothes extends Product {
         double totalCost = purchasePrice * nbItems;
         Store.updateCapitalAndCostAfterPurchase(totalCost);
         this.setNbItems(this.getNbItems()+nbItems);
-    }
+    }*/
 
-    public void sell(int nbItems){
-        if(this.getNbItems()<nbItems){
-            throw new IllegalArgumentException("Product Unavailable");
-        }
-        double saleIncome = this.getPrice() * nbItems;
-        Store.updateCapitalAfterSale(saleIncome);
-        this.setNbItems(this.getNbItems() - nbItems);
-    }
 
     public static void addProduct(String name, double price, int nbItems, int size) {
         String sql = "INSERT INTO clothes (name, price, nbItems, size) VALUES (?, ?, ?, ?)";

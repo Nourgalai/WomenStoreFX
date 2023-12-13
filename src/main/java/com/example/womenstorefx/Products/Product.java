@@ -52,6 +52,18 @@ public abstract class Product implements Discount, Comparable<Product>{
         this.nbItems=nbItems;
     }
 
+    public Product(int id, String name, int nbItems){
+        if (price<0){
+            throw new IllegalArgumentException("Negative price!");
+        }
+        if(nbItems<0){
+            throw new IllegalArgumentException("Negative number of items!");
+        }
+        this.id=id;
+        this.name=name;
+        this.nbItems=nbItems;
+    }
+
     @Override
     public int compareTo(Product otherProduct){
         return Double.compare(this.price, otherProduct.getPrice());
@@ -148,14 +160,16 @@ public abstract class Product implements Discount, Comparable<Product>{
         if (nbItems < 0) {
             throw new IllegalArgumentException("Number of items sold cannot be negative.");
         }
+        System.out.println("new nbItems :" + nbItems);
         this.nbItems-= nbItems;
+        //System.out.println("new nbItems :" + nbItems);
         updateDatabaseStock(this.getId(), this.nbItems, getTableName());
         double income = this.getPrice() * nbItems;
         Store.updateCapitalAfterSale(income);
         this.setNbItems(this.getNbItems() - nbItems);
     }
 
-    private void updateDatabaseStock(int productId, int nbItems, String productTable) {
+    public void updateDatabaseStock(int productId, int nbItems, String productTable) {
         String sql = "UPDATE " + productTable + " SET nbItems = ? WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

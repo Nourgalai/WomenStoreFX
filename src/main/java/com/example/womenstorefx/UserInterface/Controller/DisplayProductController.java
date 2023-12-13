@@ -43,10 +43,8 @@ public class DisplayProductController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            // Optional: Set title and other properties if needed
             stage.setTitle("Display Clothes");
 
-            // Refresh the stage to show the new scene
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
