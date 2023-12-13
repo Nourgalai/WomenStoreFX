@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="163.0" layoutY="14.0" prefHeight="53.0" prefWidth="261.0" text="Purchasing Process..">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </TextField>
+      <Spinner layoutX="300.0" layoutY="148.0" prefHeight="52.0" prefWidth="170.0" />
+      <TextField layoutX="111.0" layoutY="162.0" text="(item to buy)" />
+      <Button fx:id="purchaseConfirmationButton" layoutX="436.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#purchaseConfirmation" prefHeight="52.0" prefWidth="124.0" text="Confirm" />
+   </children>
+</AnchorPane>
