@@ -47,10 +47,9 @@ public class ProductTableView {
     }
 
     // Fetch data from the database and convert it into ProductModel objects
-    public void loadProductsFromDatabase(String tableName) {
-        // Assume DatabaseAccess is a class that you create to handle database operations
-        products.clear();
-        products.addAll(ProductModel.getAllProducts(tableName)); // getAllProductModels() fetches and returns a List<ProductModel>
-        tableView.setItems(products);
+    public static ObservableList<ProductModel> loadProductsFromDatabase(String tableName) {
+        ObservableList<ProductModel> productList = FXCollections.observableArrayList();
+        productList.addAll(ProductModel.getAllProducts(tableName));
+        return productList;
     }
 }

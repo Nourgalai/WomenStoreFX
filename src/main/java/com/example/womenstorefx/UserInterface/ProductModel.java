@@ -1,8 +1,6 @@
 package com.example.womenstorefx.UserInterface;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class ProductModel {
         this.nbItems = new SimpleIntegerProperty(nbItems);
     }
 
-    public static List<ProductModel> getAllProducts(String tableName) {
+    public static List<ProductModel>  getAllProducts(String tableName) {
         List<ProductModel> products = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -52,5 +50,16 @@ public class ProductModel {
         return products;
     }
 
+    public int getId() { return id.get(); }
+    public String getName() { return name.get(); }
+    public double getPrice() { return price.get(); }
+    public int getNbItems(){
+        return nbItems.get();
+    }
 
+    // property getters (used to bind to the table cells)
+    public IntegerProperty idProperty() { return id; }
+    public StringProperty nameProperty() { return name; }
+    public DoubleProperty priceProperty() { return price; }
+    public IntegerProperty nbItemsProperty() { return nbItems; }
 }

@@ -54,11 +54,10 @@ public class ProductButtonPanel {
         }
     }
 
-    private void sellItems() {
+    private void sellItems(int nbrItemsToSell) {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
-            // Example: selling 3 items
-            selectedProduct.sell(3);
+            selectedProduct.sell(nbrItemsToSell);
             productTable.refresh();
         }
     }

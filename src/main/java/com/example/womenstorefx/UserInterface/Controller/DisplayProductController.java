@@ -2,6 +2,8 @@ package com.example.womenstorefx.UserInterface.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -30,7 +32,25 @@ public class DisplayProductController {
 
     @FXML
     void showClothes(MouseEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(ClothesTableController.class.getResource("/com/example/womenstorefx/clothesTable.fxml"));
 
+            Parent root = loader.load(); // Load the FXML file
+            ClothesTableController clothesTableController = loader.getController();
+            clothesTableController.populateTableView();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            // Optional: Set title and other properties if needed
+            stage.setTitle("Display Clothes");
+
+            // Refresh the stage to show the new scene
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

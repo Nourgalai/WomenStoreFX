@@ -11,7 +11,7 @@ module com.example.womenstorefx {
     exports com.example.womenstorefx.Products;
     opens com.example.womenstorefx.Products to javafx.fxml;
     exports com.example.womenstorefx.UserInterface to javafx.fxml;
-    opens com.example.womenstorefx.UserInterface to javafx.fxml;
+    opens com.example.womenstorefx.UserInterface to javafx.fxml, javafx.base;
     exports com.example.womenstorefx.UserInterface.Controller to javafx.fxml;
     opens com.example.womenstorefx.UserInterface.Controller to javafx.fxml;
 }
