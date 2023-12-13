@@ -17,16 +17,16 @@ public class ProductButtonPanel {
     @FXML private TableView<Product> productTable;
 
     public ProductButtonPanel(TableView<ProductModel> tableView) {
-        setupButtons();
+        //setupButtons();
         buttonPanel = new HBox(10, discountButton, stopDiscountButton, purchaseButton, sellButton);
     }
 
-    private void setupButtons() {
+    /*private void setupButtons() {
         discountButton.setOnAction(event -> applyDiscount());
         stopDiscountButton.setOnAction(event -> stopDiscount());
         purchaseButton.setOnAction(event -> purchaseItems());
         sellButton.setOnAction(event -> sellItems());
-    }
+    }*/
 
     private void applyDiscount() {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
