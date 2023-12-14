@@ -20,7 +20,6 @@ public class SuccessSaleController implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ... other initialization code ...
         displayFinancialStatus();
     }
 
@@ -29,8 +28,6 @@ public class SuccessSaleController implements Initializable  {
         double capital = Store.getCapital();
         double totalIncome = Store.getTotalIncome();
 
-        // Assuming this method is called from the JavaFX Application thread;
-        // if not, wrap the updates in Platform.runLater()
         totalSaleLabel.setText(String.format("$%.2f", totalSale));
         capitalLabel.setText(String.format("$%.2f", capital));
         totalIncomeLabel.setText(String.format("$%.2f", totalIncome));

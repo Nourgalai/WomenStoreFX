@@ -2,8 +2,6 @@ package com.example.womenstorefx.Products;
 
 import com.example.womenstorefx.Discount;
 import com.example.womenstorefx.Store;
-import javafx.application.Platform;
-import javafx.scene.control.Label;
 
 import java.sql.*;
 
@@ -20,7 +18,6 @@ public abstract class Product implements Discount, Comparable<Product>{
     private static final String url = "jdbc:mysql://localhost:3306/womens_store";
     private static final String user = "root";
     private static final String password = "Nour2012";
-
 
     static {
         initializeLastId();
@@ -52,20 +49,6 @@ public abstract class Product implements Discount, Comparable<Product>{
         this.id = id;
         this.name=name;
         this.price =price;
-        this.nbItems=nbItems;
-    }
-
-
-
-    public Product(int id, String name, int nbItems){
-        if (price<0){
-            throw new IllegalArgumentException("Negative price!");
-        }
-        if(nbItems<0){
-            throw new IllegalArgumentException("Negative number of items!");
-        }
-        this.id=id;
-        this.name=name;
         this.nbItems=nbItems;
     }
 
@@ -126,18 +109,48 @@ public abstract class Product implements Discount, Comparable<Product>{
     }
 
     @Override
-    public void applyDiscount(double discountPercentage){
+    public void applyDiscount(int productId, double discountPercentage, String tableName){
         if(!isDiscounted){
-            originalPrice=price; // To save the original price for when we remove the discount
+            originalPrice=price;
             price -= price * (discountPercentage/100.0);
             isDiscounted = true;
+            updateDatabaseWithNewPrice(productId, price, tableName);
         }
     }
+
+    private void updateDatabaseWithNewPrice(int productId, double newPrice, String tableName) {
+        String query = "UPDATE " + tableName + " SET price = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setDouble(1, newPrice);
+            pstmt.setInt(2, productId);
+
+            // Log the query and parameters
+            System.out.println("Executing query: " + query);
+            System.out.println("New price: " + newPrice);
+            System.out.println("Product ID: " + productId);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Price updated successfully");
+            } else {
+                System.out.println("No rows affected.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating the price: " + e.getMessage());
+        }
+
+    }
+
 
     @Override
     public void stopDiscount(){
         if(isDiscounted){
-            price = originalPrice; // Revert to the original price
+            price = originalPrice;
             isDiscounted = false;
         }
     }
@@ -165,7 +178,6 @@ public abstract class Product implements Discount, Comparable<Product>{
         if (nbItems < 0) {
             throw new IllegalArgumentException("Number of items sold cannot be negative.");
         }
-
         this.nbItems-= nbItems;
         updateDatabaseStock(this.getId(), this.nbItems, getTableName());
         double income = this.getPrice() * nbItems;
@@ -173,7 +185,7 @@ public abstract class Product implements Discount, Comparable<Product>{
         this.setNbItems(this.getNbItems() - nbItems);
     }
 
-    public void updateDatabaseStock(int productId, int nbItems, String productTable) {
+    private void updateDatabaseStock(int productId, int nbItems, String productTable) {
         String sql = "UPDATE " + productTable + " SET nbItems = ? WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -188,4 +200,3 @@ public abstract class Product implements Discount, Comparable<Product>{
     }
 
 }
-

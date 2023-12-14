@@ -13,6 +13,7 @@ public class Accessories extends Product {
         super(id, name, price, nbItems);
     }
 
+
     @Override
     protected String getTableName() {
         return "accessories";
@@ -68,6 +69,5 @@ public class Accessories extends Product {
             e.printStackTrace();
         }
     }
-
 }
 

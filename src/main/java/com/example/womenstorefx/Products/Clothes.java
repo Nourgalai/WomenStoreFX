@@ -104,9 +104,5 @@ public class Clothes extends Product {
             e.printStackTrace();
         }
     }
-
-
-
-
 }
 

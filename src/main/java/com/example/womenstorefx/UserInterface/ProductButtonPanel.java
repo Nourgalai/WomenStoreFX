@@ -28,14 +28,13 @@ public class ProductButtonPanel {
         sellButton.setOnAction(event -> sellItems());
     }*/
 
-    private void applyDiscount() {
+    /*public void applyDiscount(int pourcentage) {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
-            // Example: applying a 10% discount
-            selectedProduct.applyDiscount(10);
+            selectedProduct.applyDiscount(pourcentage);
             productTable.refresh();
         }
-    }
+    }*/
 
     private void stopDiscount() {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();

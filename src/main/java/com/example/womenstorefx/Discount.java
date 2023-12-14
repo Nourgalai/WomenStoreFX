@@ -1,7 +1,8 @@
 package com.example.womenstorefx;
 
 public interface Discount {
-    void applyDiscount(double discountPercentage);
+    void applyDiscount(int productId, double discountPercentage, String tableName);
+
     void stopDiscount();
 }
 

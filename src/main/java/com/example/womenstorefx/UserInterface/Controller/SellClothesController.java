@@ -125,10 +125,8 @@ public class SellClothesController {
             // Set the value of the placeholder with the selectedClothesName
             pstmt.setString(1, selectedClothesName);
 
-            // Execute the query
             ResultSet rs = pstmt.executeQuery();
 
-            // If the product is found, retrieve its details
             if (rs.next()) {
                 id = rs.getInt("id");
                 price = rs.getDouble("price");
@@ -146,7 +144,7 @@ public class SellClothesController {
             System.out.println("Error fetching product: " + e.getMessage());
         }
 
-        return null; // Or handle accordingly if no product is found
+        return null;
     }
 
 }

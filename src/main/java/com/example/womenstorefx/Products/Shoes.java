@@ -25,6 +25,10 @@ public class Shoes extends Product {
         this.shoeSize = shoeSize;
     }
 
+    public Shoes(int id, String name, double price, int nbItems) {
+        super(id, name, price, nbItems);
+    }
+
     public int getShoeSize() {
         return shoeSize;
     }
@@ -96,6 +100,5 @@ public class Shoes extends Product {
             e.printStackTrace();
         }
     }
-
 }
 

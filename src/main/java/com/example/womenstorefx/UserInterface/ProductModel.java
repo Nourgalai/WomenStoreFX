@@ -41,8 +41,6 @@ public class ProductModel {
                 }
             }
 
-            // To be epeated for shoes and accessories...
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +55,6 @@ public class ProductModel {
         return nbItems.get();
     }
 
-    // property getters (used to bind to the table cells)
     public IntegerProperty idProperty() { return id; }
     public StringProperty nameProperty() { return name; }
     public DoubleProperty priceProperty() { return price; }
