@@ -2,6 +2,8 @@ package com.example.womenstorefx.Products;
 
 import com.example.womenstorefx.Discount;
 import com.example.womenstorefx.Store;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
 
 import java.sql.*;
 
@@ -18,6 +20,7 @@ public abstract class Product implements Discount, Comparable<Product>{
     private static final String url = "jdbc:mysql://localhost:3306/womens_store";
     private static final String user = "root";
     private static final String password = "Nour2012";
+
 
     static {
         initializeLastId();
@@ -46,11 +49,13 @@ public abstract class Product implements Discount, Comparable<Product>{
         if(nbItems<0){
             throw new IllegalArgumentException("Negative number of items!");
         }
-        this.id = ++lastId;
+        this.id = id;
         this.name=name;
         this.price =price;
         this.nbItems=nbItems;
     }
+
+
 
     public Product(int id, String name, int nbItems){
         if (price<0){
@@ -160,9 +165,8 @@ public abstract class Product implements Discount, Comparable<Product>{
         if (nbItems < 0) {
             throw new IllegalArgumentException("Number of items sold cannot be negative.");
         }
-        System.out.println("new nbItems :" + nbItems);
+
         this.nbItems-= nbItems;
-        //System.out.println("new nbItems :" + nbItems);
         updateDatabaseStock(this.getId(), this.nbItems, getTableName());
         double income = this.getPrice() * nbItems;
         Store.updateCapitalAfterSale(income);

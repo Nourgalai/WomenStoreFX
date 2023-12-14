@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.womenstorefx.UserInterface.Controller.SuccessSaleController">
    <children>
-      <TextField layoutX="188.0" layoutY="43.0" prefHeight="39.0" prefWidth="224.0" text="Items Sold with Success !">
+      <Text layoutX="139.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items Sold with Success !" wrappingWidth="368.09765625">
          <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="214.0" prefHeight="25.0" prefWidth="109.0" text="Capital :">
+      </Text>
+      <Text layoutX="114.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total of sale : " wrappingWidth="136.3125">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="275.0" prefHeight="39.0" prefWidth="109.0" text="Cost :">
+      </Text>
+      <Text layoutX="116.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capital :" wrappingWidth="76.6943359375">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="153.0" prefHeight="39.0" prefWidth="127.0" text="Total of sale : ">
+      </Text>
+      <Text layoutX="117.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Income :" wrappingWidth="155.26171875">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
+      </Text>
+      <Label fx:id="totalSaleLabel" layoutX="242.0" layoutY="140.0" prefHeight="33.0" prefWidth="136.0" text="totalSaleLabel">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="capitalLabel" layoutX="207.0" layoutY="206.0" prefHeight="30.0" prefWidth="127.0" text="capitalLabel">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalIncomeLabel" layoutX="251.0" layoutY="272.0" prefHeight="30.0" prefWidth="181.0" text="totalIncomeLabel">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -18,8 +18,8 @@ public class Clothes extends Product {
         setSize(size);
     }
 
-    public Clothes(int id, String name, int nbItems) {
-        super(id, name, nbItems);
+    public Clothes(int id, String name, double price, int nbItems) {
+        super(id, name, price, nbItems);
     }
 
 

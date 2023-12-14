@@ -2,15 +2,21 @@ package com.example.womenstorefx.UserInterface.Controller;
 
 import com.example.womenstorefx.Products.Clothes;
 import com.example.womenstorefx.Products.Product;
+import com.example.womenstorefx.Store;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,14 +89,35 @@ public class SellClothesController {
                 e.printStackTrace();
             }
         }
+
+        double saleAmount = productToSell.getPrice() * numberOfItemsToSell;
+        Store.updateTotalIncome(saleAmount);
+        Store.updateCapitalAfterSale(saleAmount);
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/successSale.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Display Products");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Product fetchProductFromDatabase(String selectedClothesName) {
         int id = 0;
+        double price = 0.0;
         int nbItems = 0;
 
         // Corrected SQL query using placeholders
-        String query = "SELECT id, nbItems FROM clothes WHERE name = ?";
+        String query = "SELECT id, price, nbItems FROM clothes WHERE name = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -104,12 +131,11 @@ public class SellClothesController {
             // If the product is found, retrieve its details
             if (rs.next()) {
                 id = rs.getInt("id");
-                System.out.println("id :"+ id);
+                price = rs.getDouble("price");
                 nbItems = rs.getInt("nbItems");
-                System.out.println("nbItems :"+ nbItems);
 
                 // Since Product is abstract, you need to instantiate a subclass instead, such as Clothes
-                Clothes clothes= new Clothes(id, selectedClothesName, nbItems);
+                Clothes clothes= new Clothes(id, selectedClothesName, price, nbItems);
                 System.out.println(clothes.toString());
                 System.out.println("miId :"+ clothes.getId());
                 return clothes;

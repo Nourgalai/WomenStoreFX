@@ -1,9 +1,13 @@
 package com.example.womenstorefx;
 
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+
 public class Store {
     private static double capital = 20000;
     private static double totalCost = 0;
     private static double totalIncome = 0;
+
 
     public static double getCapital() {
         return capital;
@@ -26,10 +30,15 @@ public class Store {
         capital-=purchaseCost;
     }
 
+    public static void updateTotalIncome(double saleIncome){
+        totalIncome += saleIncome;
+    }
+
     public static void displayFinancialStatus() {
         System.out.println("Current Capital: $" + capital);
         System.out.println("Total Income: $" + totalIncome);
         System.out.println("Total Cost: $" + totalCost);
     }
+
 
 }
