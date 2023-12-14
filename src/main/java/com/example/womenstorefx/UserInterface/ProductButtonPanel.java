@@ -1,3 +1,4 @@
+/*
 package com.example.womenstorefx.UserInterface;
 
 import com.example.womenstorefx.Products.Product;
@@ -21,20 +22,24 @@ public class ProductButtonPanel {
         buttonPanel = new HBox(10, discountButton, stopDiscountButton, purchaseButton, sellButton);
     }
 
-    /*private void setupButtons() {
+    */
+/*private void setupButtons() {
         discountButton.setOnAction(event -> applyDiscount());
         stopDiscountButton.setOnAction(event -> stopDiscount());
         purchaseButton.setOnAction(event -> purchaseItems());
         sellButton.setOnAction(event -> sellItems());
-    }*/
+    }*//*
 
-    /*public void applyDiscount(int pourcentage) {
+
+    */
+/*public void applyDiscount(int pourcentage) {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
             selectedProduct.applyDiscount(pourcentage);
             productTable.refresh();
         }
-    }*/
+    }*//*
+
 
     private void stopDiscount() {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
@@ -70,3 +75,4 @@ public class ProductButtonPanel {
     }
 }
 
+*/

@@ -4,7 +4,6 @@ import com.example.womenstorefx.Products.Accessories;
 import com.example.womenstorefx.Products.Clothes;
 import com.example.womenstorefx.Products.Product;
 import com.example.womenstorefx.Products.Shoes;
-import com.example.womenstorefx.UserInterface.ProductButtonPanel;
 import com.example.womenstorefx.UserInterface.ProductTableView;
 import javafx.application.Application;
 import javafx.collections.FXCollections;

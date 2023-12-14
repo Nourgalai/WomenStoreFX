@@ -148,11 +148,35 @@ public abstract class Product implements Discount, Comparable<Product>{
 
 
     @Override
-    public void stopDiscount(){
+    public void stopDiscount(int productId, String tableName){
         if(isDiscounted){
             price = originalPrice;
             isDiscounted = false;
+            updateDatabaseWithOriginalPrice(productId, tableName);
         }
+    }
+
+    private void updateDatabaseWithOriginalPrice(int productId, String tableName) {
+        String query = "UPDATE " + tableName + " SET price = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setDouble(1, originalPrice);
+            pstmt.setInt(2, productId);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Original price restored successfully");
+            } else {
+                System.out.println("No rows affected. Make sure the product ID is correct.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error restoring the original price: " + e.getMessage());
+        }
+
     }
 
     public void purchase(int nbItems, double purchasePrice){
