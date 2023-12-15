@@ -104,6 +104,20 @@ public class PurchaseExistedItemController {
 
     @FXML
     void newItemPurchase(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/purchaseNew.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Purchase New Items");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -120,12 +134,11 @@ public class PurchaseExistedItemController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            stage.setTitle("Display Clothes");
+            stage.setTitle("Purchase Existant Item");
 
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
