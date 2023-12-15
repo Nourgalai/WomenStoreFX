@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -35,6 +36,9 @@ public class SellClothesController {
 
     @FXML
     private Button confirmSellClothesButton;
+
+    @FXML
+    private Button goBackButton;
 
     @FXML
     public void initialize() {
@@ -143,8 +147,27 @@ public class SellClothesController {
             e.printStackTrace();
             System.out.println("Error fetching product: " + e.getMessage());
         }
-
         return null;
     }
 
+    @FXML
+    void goBack(MouseEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(ClothesTableController.class.getResource("/com/example/womenstorefx/clothesTable.fxml"));
+
+            Parent root = loader.load();
+            ClothesTableController clothesTableController = loader.getController();
+            clothesTableController.populateTableView();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Display Clothes");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

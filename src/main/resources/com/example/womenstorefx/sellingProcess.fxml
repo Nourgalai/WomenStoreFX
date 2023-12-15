@@ -27,5 +27,6 @@
       </Text>
       <Spinner fx:id="numberSpinner" layoutX="257.0" layoutY="208.0" prefHeight="36.0" prefWidth="174.0" />
       <Button fx:id="confirmSellClothesButton" layoutX="441.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#sellClothes" prefHeight="51.0" prefWidth="112.0" text="Confirm Sale" />
+      <Button fx:id="goBackButton" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="36.0" prefWidth="82.0" text="Go Back" />
    </children>
 </AnchorPane>

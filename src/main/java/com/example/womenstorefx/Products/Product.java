@@ -12,7 +12,7 @@ public abstract class Product implements Discount, Comparable<Product>{
     protected String name;
     protected double price;
     protected int nbItems;
-    protected boolean isDiscounted = false;
+    protected boolean isDiscounted;
     protected double originalPrice;
 
     private static final String url = "jdbc:mysql://localhost:3306/womens_store";
@@ -149,25 +149,23 @@ public abstract class Product implements Discount, Comparable<Product>{
 
     @Override
     public void stopDiscount(int productId, String tableName){
-        if(isDiscounted){
-            price = originalPrice;
-            isDiscounted = false;
-            updateDatabaseWithOriginalPrice(productId, tableName);
-        }
+        price = originalPrice;
+        isDiscounted = false;
+        updateDatabaseWithOriginalPrice(productId, tableName);
     }
 
     private void updateDatabaseWithOriginalPrice(int productId, String tableName) {
-        String query = "UPDATE " + tableName + " SET price = ? WHERE id = ?";
+        String query = "UPDATE " + tableName + " SET price = original_price WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setDouble(1, originalPrice);
-            pstmt.setInt(2, productId);
+            pstmt.setInt(1, productId);
+
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("Original price restored successfully");
+                System.out.println("Discount stopped ! Original price restored successfully");
             } else {
                 System.out.println("No rows affected. Make sure the product ID is correct.");
             }

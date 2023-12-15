@@ -23,6 +23,9 @@ public class DisplayProductController {
     private Button clothesButton;
 
     @FXML
+    private Button goBackButton;
+
+    @FXML
     private TextField greenting;
 
     @FXML
@@ -54,5 +57,26 @@ public class DisplayProductController {
     @FXML
     void showShoes(MouseEvent event) {
 
+    }
+
+
+    @FXML
+    void goBack(MouseEvent event) {
+        try {
+            // Load the FXML file for the new scene
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/sample.fxml"));
+            Parent root = loader.load();
+
+            // Change the scene on the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Women's Store Management");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

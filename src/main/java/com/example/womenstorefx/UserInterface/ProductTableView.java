@@ -31,10 +31,16 @@ public class ProductTableView {
         TableColumn<ProductModel, Number> nbItemsColumn = new TableColumn<>("Number of Items");
         nbItemsColumn.setCellValueFactory(new PropertyValueFactory<>("nbItems"));
 
+        TableColumn<ProductModel, Number> originalPriceColumn = new TableColumn<>("Original Price");
+        originalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("originalPrice"));
+
+
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(nameColumn);
         tableView.getColumns().add(priceColumn);
         tableView.getColumns().add(nbItemsColumn);
+        tableView.getColumns().add(originalPriceColumn);
+
     }
     public TableView<ProductModel> getTableView() {
         return tableView;

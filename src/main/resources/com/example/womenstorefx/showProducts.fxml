@@ -7,13 +7,14 @@
 
 <AnchorPane fx:id="greeting" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.womenstorefx.UserInterface.Controller.DisplayProductController">
    <children>
-      <Button fx:id="clothesButton" layoutX="205.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#showClothes" prefHeight="60.0" prefWidth="150.0" text="Clothes" />
-      <Button fx:id="ShoesButton" layoutX="205.0" layoutY="207.0" mnemonicParsing="false" onMouseClicked="#showShoes" prefHeight="60.0" prefWidth="150.0" text="Shoes" />
-      <Button fx:id="AccessoriesButton" layoutX="205.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#showAccesories" prefHeight="60.0" prefWidth="150.0" text="Accessories" />
+      <Button fx:id="clothesButton" layoutX="204.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#showClothes" prefHeight="60.0" prefWidth="150.0" text="Clothes" />
+      <Button fx:id="ShoesButton" layoutX="204.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#showShoes" prefHeight="60.0" prefWidth="150.0" text="Shoes" />
+      <Button fx:id="AccessoriesButton" layoutX="204.0" layoutY="283.0" mnemonicParsing="false" onMouseClicked="#showAccesories" prefHeight="60.0" prefWidth="150.0" text="Accessories" />
       <Text layoutX="175.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products Available !" wrappingWidth="229.1142578125">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
+      <Button fx:id="goBackButton" layoutX="22.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="43.0" prefWidth="89.0" text="Go Back" />
    </children>
 </AnchorPane>

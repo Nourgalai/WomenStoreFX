@@ -2,7 +2,6 @@ package com.example.womenstorefx.UserInterface.Controller;
 
 import com.example.womenstorefx.UserInterface.ProductModel;
 import com.example.womenstorefx.UserInterface.ProductTableView;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +28,9 @@ public class ClothesTableController implements Initializable {
     private Button clothesSellButton;
 
     @FXML
+    private Button goBackButton;
+
+    @FXML
     private TableView<ProductModel> clothesTableView;
 
     @FXML
@@ -43,12 +45,30 @@ public class ClothesTableController implements Initializable {
     @FXML
     private TableColumn<ProductModel, Double> priceColumn;
 
+    @FXML
+    private TableColumn<ProductModel, Double> originalPriceColumn;
+
     /*@FXML
     private TableColumn<ProductModel, Integer>sizeColumns;*/
 
     @FXML
     void productPurchase(MouseEvent event) {
+        try {
+            // Load the FXML file for the new scene
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/purchaseExistant.fxml"));
+            Parent root = loader.load();
 
+            // Change the scene on the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Clothes Purchase");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -56,7 +76,7 @@ public class ClothesTableController implements Initializable {
         try {
             // Load the FXML file for the new scene
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/SellingProcess1.fxml"));
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/sellingProcess.fxml"));
             Parent root = loader.load();
 
             // Change the scene on the current stage
@@ -69,7 +89,6 @@ public class ClothesTableController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -78,6 +97,7 @@ public class ClothesTableController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         nbItemsColumns.setCellValueFactory(new PropertyValueFactory<>("nbItems"));
+        originalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("originalPrice"));
         //sizeColumns.setCellValueFactory(new PropertyValueFactory<>("size"));
 
 
@@ -87,5 +107,25 @@ public class ClothesTableController implements Initializable {
     public void populateTableView() {
         ObservableList<ProductModel> clothesData = ProductTableView.loadProductsFromDatabase("clothes");
         clothesTableView.setItems(clothesData);
+    }
+
+    @FXML
+    void goBack(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/showProducts.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Display Products");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
