@@ -1,4 +1,4 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.TableDisplay;
 
 import com.example.womenstorefx.UserInterface.ProductModel;
 import com.example.womenstorefx.UserInterface.ProductTableView;

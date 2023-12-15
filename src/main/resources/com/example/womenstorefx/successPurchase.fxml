@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.womenstorefx.UserInterface.Controllers.Purchase.SuccessPurchaseController">
    <children>
-      <TextField layoutX="173.0" layoutY="42.0" prefHeight="39.0" prefWidth="275.0" text="Items Purchased with Success !">
+      <Text layoutX="148.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items Purchased with Success !">
          <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="214.0" prefHeight="25.0" prefWidth="109.0" text="Capital :">
+      </Text>
+      <Text layoutX="94.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total of purchase : " wrappingWidth="176.1875">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="275.0" prefHeight="39.0" prefWidth="109.0" text="Cost :">
+      </Text>
+      <Text layoutX="94.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capital :" wrappingWidth="95.771484375">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
-      <TextField layoutX="84.0" layoutY="153.0" prefHeight="39.0" prefWidth="127.0" text="Total of sale : ">
+      </Text>
+      <Label fx:id="purchaseLabel" layoutX="274.0" layoutY="147.0" prefHeight="33.0" prefWidth="176.0" text="totalPurchaseLabel">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
-      </TextField>
+      </Label>
+      <Label fx:id="capitalLabel" layoutX="182.0" layoutY="197.0" prefHeight="33.0" prefWidth="144.0" text="capitalLabel">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,9 +1,10 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.Purchase;
 
+import com.example.womenstorefx.Store;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.DisplayProductController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -89,6 +90,27 @@ public class PurchaseNewItemController {
             System.out.println("Number format error: " + e.getMessage());
         }
 
+        double priceNum = Double.parseDouble(price);
+        int nbItemsNum = Integer.parseInt(nbItems);
+        double purchaseCost = priceNum * nbItemsNum;
+        Store.updateCapitalAndCostAfterPurchase(purchaseCost);
+
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/successPurchase.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Purchase Success");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.Sale;
 
 import com.example.womenstorefx.Store;
 import javafx.fxml.FXML;

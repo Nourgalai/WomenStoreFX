@@ -1,5 +1,8 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.Purchase;
 
+import com.example.womenstorefx.Store;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.ClothesTableController;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.DisplayProductController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -83,6 +86,27 @@ public class PurchaseExistedItemController {
         String selectedItem = itemChoiceBox.getValue();
         int numberOfItemsToPurchase = Integer.parseInt(numberPurchasedInput.getText());
 
+        double price = 0;
+        int nbItems = 0;
+
+        String selectQuery = "SELECT price, nbItems FROM " + selectedCategory + " WHERE name = ?";
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement selectStmt = conn.prepareStatement(selectQuery)) {
+
+            selectStmt.setString(1, selectedItem);
+
+            try (ResultSet rs = selectStmt.executeQuery()) {
+                if (rs.next()) {
+                    price = rs.getDouble("price");
+                    nbItems = rs.getInt("nbItems");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error fetching item data: " + e.getMessage());
+            return;
+        }
+
         String query = "UPDATE " + selectedCategory + " SET nbItems = nbItems + ? WHERE name = ?";
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -99,6 +123,24 @@ public class PurchaseExistedItemController {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error updating the database: " + e.getMessage());
+        }
+
+        double purchaseCost = price * numberOfItemsToPurchase;
+        Store.updateCapitalAndCostAfterPurchase(purchaseCost);
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/successPurchase.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Purchase Success");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

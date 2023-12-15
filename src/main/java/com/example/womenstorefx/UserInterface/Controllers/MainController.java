@@ -1,5 +1,6 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers;
 
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.DisplayProductController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

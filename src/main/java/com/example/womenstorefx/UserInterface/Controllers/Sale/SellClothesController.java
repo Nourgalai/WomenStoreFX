@@ -1,10 +1,10 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.Sale;
 
 import com.example.womenstorefx.Products.Clothes;
 import com.example.womenstorefx.Products.Product;
 import com.example.womenstorefx.Store;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.ClothesTableController;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.DisplayProductController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

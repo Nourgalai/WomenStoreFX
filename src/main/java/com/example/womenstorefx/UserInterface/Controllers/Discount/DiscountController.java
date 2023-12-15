@@ -1,34 +1,39 @@
-package com.example.womenstorefx.UserInterface.Controller;
+package com.example.womenstorefx.UserInterface.Controllers.Discount;
 
 import com.example.womenstorefx.Products.Accessories;
 import com.example.womenstorefx.Products.Clothes;
 import com.example.womenstorefx.Products.Product;
 import com.example.womenstorefx.Products.Shoes;
+import com.example.womenstorefx.UserInterface.Controllers.TableDisplay.DisplayProductController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
-public class stopDiscountController {
+public class DiscountController {
+    @FXML
+    private Button applyDiscountButton;
 
     @FXML
-    private Button stopDiscountButton;
+    private ChoiceBox<String> discountCategoryChoiceBox;
 
     @FXML
-    private ChoiceBox<String> stopDiscountCategoryChoiceBox;
+    private Button discountGoBackButton;
 
     @FXML
-    private Button stopDiscountGoBackButton;
+    private ChoiceBox<String> discountItemChoiceBox;
 
     @FXML
-    private ChoiceBox<String> stopDiscountItemChoiceBox;
+    private Spinner<Integer> percentageSpinner;
 
     private static final String url = "jdbc:mysql://localhost:3306/womens_store";
     private static final String user = "root";
@@ -36,45 +41,58 @@ public class stopDiscountController {
 
     @FXML
     public void initialize() {
-        stopDiscountCategoryChoiceBox.getItems().addAll("Clothes", "Shoes", "Accessories");
-        // Add listener to the category choice box
-        stopDiscountCategoryChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        discountCategoryChoiceBox.getItems().addAll("Clothes", "Shoes", "Accessories");
+
+        discountCategoryChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             updateItemChoiceBox(newVal);
         });
+
+        discountCategoryChoiceBox.getSelectionModel().selectFirst();
+
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 90, 5, 5);
+        percentageSpinner.setValueFactory(valueFactory);
+        percentageSpinner.setEditable(true);
     }
 
     private void updateItemChoiceBox(String category) {
-        stopDiscountItemChoiceBox.getItems().clear();
+        discountItemChoiceBox.getItems().clear();
+
         String query = "SELECT name FROM " + category.toLowerCase();
+
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
-                stopDiscountItemChoiceBox.getItems().add(rs.getString("name"));
+                String name = rs.getString("name");
+                discountItemChoiceBox.getItems().add(name);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
-    void stopDiscount(MouseEvent event) {
-        String selectedCategory = stopDiscountCategoryChoiceBox.getValue();
-        String selectedItem = stopDiscountItemChoiceBox.getValue();
+    void applyDiscount(MouseEvent event) {
+        String selectedCategory = discountCategoryChoiceBox.getValue();
+        String selectedItem = discountItemChoiceBox.getValue();
+        int discountPercentage = percentageSpinner.getValue();
 
-        if (selectedItem == null || selectedCategory == null) {
+        if (selectedCategory == null || selectedItem == null || discountPercentage <= 0) {
             return;
         }
-        stopDicountonItem(selectedCategory,selectedItem);
+        applyDiscountToItem(selectedCategory, selectedItem, discountPercentage);
     }
 
-    private void stopDicountonItem(String selectedCategory, String selectedItem) {
+    private void applyDiscountToItem(String selectedCategory, String selectedItem, int discountPercentage) {
+
         Product product = fetchProductFromDatabase(selectedCategory, selectedItem);
         int id = product.getId();
-        product.stopDiscount(id,selectedCategory);
+        product.applyDiscount(id,discountPercentage, selectedCategory);
     }
+
+
 
     private Product fetchProductFromDatabase(String selectedCategory, String selectedItem) {
         int id = 0;
@@ -107,7 +125,7 @@ public class stopDiscountController {
                 } else if ("accessories".equalsIgnoreCase(selectedCategory)) {
                     product = new Accessories(id, selectedItem, price, nbItems);
                 }
-                product.toString();
+                //product.toString();
                 return product;
             }
 
@@ -120,7 +138,7 @@ public class stopDiscountController {
     }
 
     @FXML
-    void stopDiscountGoBack(MouseEvent event) {
+    void discountGoBack(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/sample.fxml"));
@@ -135,6 +153,6 @@ public class stopDiscountController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
 }

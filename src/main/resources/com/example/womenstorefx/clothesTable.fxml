@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.womenstorefx.UserInterface.Controller.ClothesTableController">
+<AnchorPane layoutX="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.womenstorefx.UserInterface.Controllers.TableDisplay.ClothesTableController">
    <children>
       <Button fx:id="clothesSellButton" layoutX="172.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#productSell" prefHeight="34.0" prefWidth="109.0" text="Sell" />
       <Button fx:id="clothesPurchaseButton" layoutX="320.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#productPurchase" prefHeight="34.0" prefWidth="109.0" text="Purchase" />
