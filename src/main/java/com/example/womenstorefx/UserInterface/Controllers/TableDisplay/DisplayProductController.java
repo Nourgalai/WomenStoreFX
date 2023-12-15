@@ -28,10 +28,7 @@ public class DisplayProductController {
     @FXML
     private TextField greenting;
 
-    @FXML
-    void showAccesories(MouseEvent event) {
 
-    }
 
     @FXML
     void showClothes(MouseEvent event) {
@@ -39,7 +36,7 @@ public class DisplayProductController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(ClothesTableController.class.getResource("/com/example/womenstorefx/clothesTable.fxml"));
 
-            Parent root = loader.load(); // Load the FXML file
+            Parent root = loader.load();
             ClothesTableController clothesTableController = loader.getController();
             clothesTableController.populateTableView();
 
@@ -56,9 +53,43 @@ public class DisplayProductController {
 
     @FXML
     void showShoes(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/shoesTable.fxml"));
+
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.setTitle("Display Shoes");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
+    @FXML
+    void showAccesories(MouseEvent event) {
+        try {
+            // Load the FXML file for the new scene
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/accessoriesTable.fxml"));
+            Parent root = loader.load();
+
+            // Change the scene on the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Display Accessories");
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @FXML
     void goBack(MouseEvent event) {

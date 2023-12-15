@@ -20,18 +20,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ShoesTableController implements Initializable {
+public class AccessoriesTableController implements Initializable {
     @FXML
-    private Button shoesPurchaseButton;
+    private Button accessoriesPurchaseButton;
 
     @FXML
-    private Button shoesSellButton;
+    private Button accessoriesSellButton;
 
     @FXML
     private Button goBackButton;
 
     @FXML
-    private TableView<ProductModel> shoesTableView;
+    private TableView<ProductModel> accessoriesTableView;
 
     @FXML
     private TableColumn<ProductModel, Integer> idColumn;
@@ -63,7 +63,7 @@ public class ShoesTableController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            stage.setTitle("shoes Purchase");
+            stage.setTitle("accessories Purchase");
 
             stage.show();
         } catch (IOException e) {
@@ -76,14 +76,14 @@ public class ShoesTableController implements Initializable {
         try {
             // Load the FXML file for the new scene
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/shoesSellingProcess.fxml"));
+            loader.setLocation(DisplayProductController.class.getResource("/com/example/womenstorefx/accessoriesSellingProcess.fxml"));
             Parent root = loader.load();
 
             // Change the scene on the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            stage.setTitle("shoes Sale");
+            stage.setTitle("Accessories Sale");
 
             stage.show();
         } catch (IOException e) {
@@ -105,8 +105,8 @@ public class ShoesTableController implements Initializable {
     }
 
     public void populateTableView() {
-        ObservableList<ProductModel> shoesData = ProductTableView.loadProductsFromDatabase("shoes");
-        shoesTableView.setItems(shoesData);
+        ObservableList<ProductModel> accessoriesData = ProductTableView.loadProductsFromDatabase("accessories");
+        accessoriesTableView.setItems(accessoriesData);
     }
 
     @FXML
